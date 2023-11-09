@@ -12,11 +12,13 @@ public class PlayerShip : SingletonMonoBehaviour<PlayerShip>
 
     public PlayerInput PlayerInput { get; private set; }
 
+
     protected override void Awake()
     {
         base.Awake();
         PlayerInput = GetComponent<PlayerInput>();
     }
+
 
     private void FixedUpdate()
     {
@@ -29,6 +31,7 @@ public class PlayerShip : SingletonMonoBehaviour<PlayerShip>
         transform.position = (Vector2)transform.position + moveAmount;
         CheckBorder();
     }
+
 
     private void CheckBorder()
     {

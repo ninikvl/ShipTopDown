@@ -10,9 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 258641565daff2a4caa01de780018604, type: 3}
-  m_Name: GunDataSO_Default
+  m_Name: GunDataSO_Auto Cannon
   m_EditorClassIdentifier: 
-  Name: Start Gun
+  Name: Auto Cannon
+  Description: 
+  GunSprite: {fileID: 454166793, guid: 1135b58b806208f46b0e9fa99f6d7ab2, type: 3}
   BulletPrefab: {fileID: 5471594837369850996, guid: babeb3afe9155e04a9af741912546f67, type: 3}
-  BulletSpeed: 0
+  BulletSpeed: 10
   BulletSpawnInterval: 0.2
+  BulletDamage: 1

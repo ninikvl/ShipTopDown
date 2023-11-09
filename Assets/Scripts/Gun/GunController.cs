@@ -13,39 +13,48 @@ public class GunController : MonoBehaviour
 
     private PlayerInput _playerInput;
 
-    private Coroutine _coroutine = null;
+    private Coroutine _ShootCoroutine = null;
+
+    private SpriteRenderer _spriteRenderer;
+
 
     private void Awake()
     {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+
         _gunsList = new List<Gun>()
         {
-            new DefaultGun (Gun.TierLevel.First, _defaultGunData)
+            new AutoCannon (Gun.TierLevel.First, _defaultGunData)
         };
 
         _activeGun = _gunsList[0];
+        _spriteRenderer.sprite = _activeGun.GunDataSO.GunSprite;
     }
+
 
     private void Start()
     {
         _playerInput = PlayerShip.Instance.PlayerInput;
     }
 
+
     private void FixedUpdate()
     {
         if (_activeGun == null)
             Debug.LogException(new Exception("Активное оружие не установленно"));
 
-        if (_playerInput.IsShoot && _coroutine == null)
+        if (_playerInput.IsShoot && _ShootCoroutine == null)
         {
-            _coroutine = StartCoroutine(ShootRoutine());
+            _ShootCoroutine = StartCoroutine(ShootRoutine());
         }
     }
+
 
     private IEnumerator ShootRoutine()
     {
         _activeGun.InitializeShoot(transform.position);
 
         yield return new WaitForSeconds(_activeGun.GunDataSO.BulletSpawnInterval);
-        _coroutine = null;
+        _ShootCoroutine = null;
     }
 }

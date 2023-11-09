@@ -9,6 +9,7 @@ public class PoolManager : SingletonMonoBehaviour<PoolManager>
     private Transform objectPoolTransform;
     private Dictionary<int, Queue<Component>> poolDictionary = new Dictionary<int, Queue<Component>>();
 
+
     [System.Serializable]
     public struct Pool
     {
@@ -17,10 +18,12 @@ public class PoolManager : SingletonMonoBehaviour<PoolManager>
         public string componentType;
     }
 
+
     protected override void Awake()
     {
         base.Awake();
     }
+
 
     private void Start()
     {
@@ -31,6 +34,7 @@ public class PoolManager : SingletonMonoBehaviour<PoolManager>
             CreatePool(poolArray[i].prefab, poolArray[i].poolSize, poolArray[i].componentType);
         }
     }
+
 
     private void CreatePool(GameObject prefab, int poolSize, string componentType)
     {
@@ -54,6 +58,7 @@ public class PoolManager : SingletonMonoBehaviour<PoolManager>
         }
     }
 
+
     public Component ReuseComponent(GameObject prefab, Vector3 position, Quaternion rotation)
     {
         int poolKey = prefab.GetInstanceID();
@@ -72,6 +77,7 @@ public class PoolManager : SingletonMonoBehaviour<PoolManager>
         }
     }
 
+
     private Component GetComponentFromPool(int poolKey)
     {
         Component componentToReuse = poolDictionary[poolKey].Dequeue();
@@ -84,6 +90,7 @@ public class PoolManager : SingletonMonoBehaviour<PoolManager>
 
         return componentToReuse;
     }
+
 
     private void ResetObject(Vector3 position, Quaternion rotation, Component componentToReuse, GameObject prefab)
     {

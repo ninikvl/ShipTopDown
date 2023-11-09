@@ -10,15 +10,18 @@ public class PlayerInput : MonoBehaviour
     public bool IsSpeedUp => _gameInput.Gameplay.SpeedUp.ReadValue<float>() == 1;
     public bool IsShoot => _gameInput.Gameplay.Shoot.ReadValue<float>() == 1;
 
+
     private void Awake()
     {
         _gameInput = new GameInput();
     }
 
+
     private void OnEnable()
     {
         _gameInput.Enable();
     }
+
 
     private void OnDisable()
     {
