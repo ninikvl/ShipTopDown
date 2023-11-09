@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Gun : IGunable
+public abstract class Gun : IGunable
 {
     public enum TierLevel
     {
@@ -9,14 +9,21 @@ public class Gun : IGunable
         Third
     }
 
-    private TierLevel _tierLevel;
+    protected TierLevel _tierLevel;
 
     public GunDataSO GunDataSO { get; private set; }
+
+    protected float _bulletSpawnInterval;
+
+    protected int _bulletDamage;
 
     public Gun(TierLevel tierLevel, GunDataSO gunDataSO)
     {
         this._tierLevel = tierLevel;
         GunDataSO = gunDataSO;
+
+        _bulletSpawnInterval = gunDataSO.BulletSpawnIntervalTier1;
+        _bulletDamage = gunDataSO.BulletDamageTier1;
     }
 
     public virtual void InitializeShoot(Vector3 gunPosition)
@@ -37,23 +44,38 @@ public class Gun : IGunable
         }
     }
 
-    protected virtual void ShootTierOne(Vector3 gunPosition)
-    {
-    }
 
-    protected virtual  void ShootTierTwo(Vector3 gunPosition)
+    public float GetBulletSpawnInterval()
     {
+        return _bulletSpawnInterval;
     }
+    
 
-    protected virtual void ShootTierThree(Vector3 gunPosition)
-    {
-    }
-
-    public void UpTierLevel()
+    public virtual void UpTierLevel()
     {
         if (_tierLevel != TierLevel.Third)
         {
             _tierLevel++;
+
+            switch (_tierLevel)
+            {
+                case TierLevel.Second:
+                    _bulletSpawnInterval = GunDataSO.BulletSpawnIntervalTier2;
+                    _bulletDamage = GunDataSO.BulletDamageTier2;
+                    break;
+                case TierLevel.Third:
+                    _bulletSpawnInterval = GunDataSO.BulletSpawnIntervalTier3;
+                    _bulletDamage = GunDataSO.BulletDamageTier3;
+                    break;
+                default:
+                    break;
+            }
         }
     }
+
+    protected abstract void ShootTierOne(Vector3 gunPosition);
+
+    protected abstract void ShootTierTwo(Vector3 gunPosition);
+
+    protected abstract void ShootTierThree(Vector3 gunPosition);
 }

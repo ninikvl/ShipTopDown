@@ -39,7 +39,12 @@ public class Bullet : MonoBehaviour, IBulletable
 
     private void DealDamage(Collider2D collision)
     {
-        throw new NotImplementedException();
+        Health health = collision.GetComponent<Health>();
+
+        if (health != null)
+        {
+            health.TakeDamage(_damage);
+        }
     }
 
 
@@ -57,8 +62,8 @@ public class Bullet : MonoBehaviour, IBulletable
     {
         yield return new WaitForSeconds(lifeTime);
         DisableBullet();
-
     }
+
 
     private void DisableBullet()
     {

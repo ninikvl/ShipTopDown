@@ -5,10 +5,10 @@ public class PlayerShip : SingletonMonoBehaviour<PlayerShip>
     private readonly float _moveSpeed = 3f;
     private readonly float _speedUp = 3f;
 
-    private readonly float _xLeftBorder = 1.3f;
-    private readonly float _xRightBorder = 16.3f;
-    private readonly float _yUpBorder = 9.5f;
-    private readonly float _yDownBorder = 0.5f;
+    private readonly float _xLeftBorder = -5.5f;
+    private readonly float _xRightBorder = 23.3f;
+    private readonly float _yUpBorder = 12.58f;
+    private readonly float _yDownBorder = -2.2f;
 
     public PlayerInput PlayerInput { get; private set; }
 
@@ -52,5 +52,11 @@ public class PlayerShip : SingletonMonoBehaviour<PlayerShip>
         {
             transform.position = new Vector2(transform.position.x, _yDownBorder);
         }
+    }
+
+
+    public void PlayerDestroyed()
+    {
+
     }
 }

@@ -54,7 +54,12 @@ public class GunController : MonoBehaviour
     {
         _activeGun.InitializeShoot(transform.position);
 
-        yield return new WaitForSeconds(_activeGun.GunDataSO.BulletSpawnInterval);
+        yield return new WaitForSeconds(_activeGun.GetBulletSpawnInterval());
         _ShootCoroutine = null;
+    }
+
+    public void GunTierUp()
+    {
+        _activeGun.UpTierLevel();
     }
 }

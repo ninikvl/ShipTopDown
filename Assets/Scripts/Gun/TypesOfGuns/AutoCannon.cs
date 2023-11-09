@@ -1,4 +1,5 @@
 using UnityEngine;
+using static Gun;
 
 public class AutoCannon : Gun
 {
@@ -15,21 +16,25 @@ public class AutoCannon : Gun
 
     protected override void ShootTierOne(Vector3 gunPosition)
     {
-        base.ShootTierOne(gunPosition);
-
         IBulletable bullet = (IBulletable)PoolManager.Instance.ReuseComponent(GunDataSO.BulletPrefab, gunPosition, Quaternion.identity);
-        bullet.Initialize(GunDataSO.BulletSpeed, GunDataSO.BulletDamage);
+        bullet.Initialize(GunDataSO.BulletSpeed, _bulletDamage);
     }
 
 
     protected override void ShootTierTwo(Vector3 gunPosition)
     {
-        base.ShootTierTwo(gunPosition);
+        IBulletable bullet = (IBulletable)PoolManager.Instance.ReuseComponent(GunDataSO.BulletPrefab, gunPosition, Quaternion.identity);
+        bullet.Initialize(GunDataSO.BulletSpeed, _bulletDamage);
     }
 
 
     protected override void ShootTierThree(Vector3 gunPosition)
     {
-        base.ShootTierThree(gunPosition);
+
+    }
+
+    public override void UpTierLevel()
+    {
+        base.UpTierLevel();
     }
 }
