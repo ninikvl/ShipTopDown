@@ -20,20 +20,5 @@ public class GunDataSO : ScriptableObject
     [SerializeField] public float BulletSpawnIntervalTier2;
     [SerializeField] public float BulletSpawnIntervalTier3;
 
-
-    #region Header Снаряд
-    [Header("Снаряд")]
-    #endregion
-    #region Header
-    [Header("Параметры снаряда")]
-    #endregion
-    [SerializeField] public GameObject BulletPrefab;
-    [SerializeField] public int BulletSpeed;
-
-    #region Header
-    [Header("Урон снаряда")]
-    #endregion
-    [SerializeField] public int BulletDamageTier1;
-    [SerializeField] public int BulletDamageTier2;
-    [SerializeField] public int BulletDamageTier3;
+    [SerializeField] public BulletDataSO BulletDataSO;
 }

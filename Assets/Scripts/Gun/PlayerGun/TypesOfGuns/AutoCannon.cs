@@ -16,15 +16,15 @@ public class AutoCannon : Gun
 
     protected override void ShootTierOne(Vector3 gunPosition)
     {
-        IBulletable bullet = (IBulletable)PoolManager.Instance.ReuseComponent(GunDataSO.BulletPrefab, gunPosition, Quaternion.identity);
-        bullet.Initialize(GunDataSO.BulletSpeed, _bulletDamage);
+        IShootable bullet = (IShootable)PoolManager.Instance.ReuseComponent(BulletDataSO.BulletPrefab, gunPosition, Quaternion.identity);
+        bullet.Initialize(BulletDataSO.BulletSpeed, _bulletDamage, BulletDataSO);
     }
 
 
     protected override void ShootTierTwo(Vector3 gunPosition)
     {
-        IBulletable bullet = (IBulletable)PoolManager.Instance.ReuseComponent(GunDataSO.BulletPrefab, gunPosition, Quaternion.identity);
-        bullet.Initialize(GunDataSO.BulletSpeed, _bulletDamage);
+        IShootable bullet = (IShootable)PoolManager.Instance.ReuseComponent(BulletDataSO.BulletPrefab, gunPosition, Quaternion.identity);
+        bullet.Initialize(BulletDataSO.BulletSpeed, _bulletDamage, BulletDataSO);
     }
 
 

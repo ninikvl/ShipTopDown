@@ -9,4 +9,15 @@ public static class Settings
     public static int EnemyShooting = Animator.StringToHash("Shooting");
     public static int EnemyDestruction = Animator.StringToHash("Destruction");
     #endregion
+
+    #region MapCoorinates
+    public static Vector2 LeftUpBoarder = new Vector2(0f, 16.875f);
+    public static Vector2 RightDownBoarder = new Vector2(30f, 0f);
+    #endregion
+
+
+    #region BulletAnimations
+    public static int LazerAnimation = Animator.StringToHash("Lazer");
+    #endregion
+
 }

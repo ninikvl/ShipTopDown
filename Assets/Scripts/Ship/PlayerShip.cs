@@ -5,10 +5,8 @@ public class PlayerShip : SingletonMonoBehaviour<PlayerShip>
     private readonly float _moveSpeed = 3f;
     private readonly float _speedUp = 3f;
 
-    private readonly float _xLeftBorder = -5.5f;
-    private readonly float _xRightBorder = 23.3f;
-    private readonly float _yUpBorder = 12.58f;
-    private readonly float _yDownBorder = -2.2f;
+    private readonly float _xShipOffest = 0.5f;
+    private readonly float _yShipOffest = 0.7f;
 
     public PlayerInput PlayerInput { get; private set; }
 
@@ -35,23 +33,29 @@ public class PlayerShip : SingletonMonoBehaviour<PlayerShip>
 
     private void CheckBorder()
     {
-        if (transform.position.x < _xLeftBorder)
+        if (transform.position.x < Settings.LeftUpBoarder.x + _xShipOffest)
         {
-            transform.position = new Vector2(_xLeftBorder, transform.position.y);
+            transform.position = new Vector2(Settings.LeftUpBoarder.x + _xShipOffest, transform.position.y);
         }
-        else if (transform.position.x > _xRightBorder)
+        else if (transform.position.x > Settings.RightDownBoarder.x + _xShipOffest)
         {
-            transform.position = new Vector2(_xRightBorder, transform.position.y);
+            transform.position = new Vector2(Settings.RightDownBoarder.x + _xShipOffest, transform.position.y);
         }
 
-        if (transform.position.y > _yUpBorder)
+        if (transform.position.y > Settings.LeftUpBoarder.y - _yShipOffest)
         {
-            transform.position = new Vector2(transform.position.x, _yUpBorder);
+            transform.position = new Vector2(transform.position.x, Settings.LeftUpBoarder.y - _yShipOffest);
         }
-        else if (transform.position.y < _yDownBorder)
+        else if (transform.position.y < Settings.RightDownBoarder.y + _yShipOffest)
         {
-            transform.position = new Vector2(transform.position.x, _yDownBorder);
+            transform.position = new Vector2(transform.position.x, Settings.RightDownBoarder.y + _yShipOffest);
         }
+    }
+
+
+    public Vector2 GetPlayerPositon()
+    {
+        return transform.position;
     }
 
 

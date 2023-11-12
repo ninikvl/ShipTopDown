@@ -12,6 +12,7 @@ public abstract class Gun : IGunable
     protected TierLevel _tierLevel;
 
     public GunDataSO GunDataSO { get; private set; }
+    public BulletDataSO BulletDataSO { get; private set; }
 
     protected float _bulletSpawnInterval;
 
@@ -21,9 +22,10 @@ public abstract class Gun : IGunable
     {
         this._tierLevel = tierLevel;
         GunDataSO = gunDataSO;
+        BulletDataSO = gunDataSO.BulletDataSO;
 
         _bulletSpawnInterval = gunDataSO.BulletSpawnIntervalTier1;
-        _bulletDamage = gunDataSO.BulletDamageTier1;
+        _bulletDamage = BulletDataSO.BulletDamageTier1;
     }
 
     public virtual void InitializeShoot(Vector3 gunPosition)
@@ -61,11 +63,11 @@ public abstract class Gun : IGunable
             {
                 case TierLevel.Second:
                     _bulletSpawnInterval = GunDataSO.BulletSpawnIntervalTier2;
-                    _bulletDamage = GunDataSO.BulletDamageTier2;
+                    _bulletDamage = BulletDataSO.BulletDamageTier2;
                     break;
                 case TierLevel.Third:
                     _bulletSpawnInterval = GunDataSO.BulletSpawnIntervalTier3;
-                    _bulletDamage = GunDataSO.BulletDamageTier3;
+                    _bulletDamage = BulletDataSO.BulletDamageTier3;
                     break;
                 default:
                     break;
