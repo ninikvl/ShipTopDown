@@ -11,35 +11,67 @@ public class Enemy : MonoBehaviour
     private Health _health;
     private AnimateEnemy _animateEnemy;
     private PolygonCollider2D _polygonCollider;
+    private EnemyAI _enemyAI;
     
     public Animator Animator { get; private set; }
 
+    public bool IsShooting {  get; private set; }
+    public bool IsDestroying { get; private set; }
+    
 
     private void Awake()
     {
         _health = GetComponent<Health>();
         _animateEnemy = GetComponent<AnimateEnemy>();
         _polygonCollider = GetComponent<PolygonCollider2D>();
+        _enemyAI = GetComponent<EnemyAI>();
         Animator = GetComponent<Animator>();
+
+        IsDestroying = false;
+        IsShooting = false;
 
         _health.SetStartHealth(_enemyDataSO.HealthPoint);
     }
 
-    public void EnemyDestroyed()
+    public void StartEnemyDestroy()
     {
-        _animateEnemy.DestroyAnimation();
+        if (IsDestroying)
+            return;
+
+        IsDestroying = true;
+        _enemyAI.DeactivateAI();
+        StopAllCoroutines();
+
         _polygonCollider.enabled = false;
 
-        AnimatorStateInfo animatorStateInfo = Animator.GetCurrentAnimatorStateInfo(0);
+        _animateEnemy.DestroyAnimation();
 
-        StartCoroutine(AD(animatorStateInfo));
+        StartCoroutine(DestroyEnemyRoutine());
     }
 
-    private IEnumerator AD(AnimatorStateInfo animatorStateInfo)
+    public void StartEnemyAttack()
     {
-        yield return new WaitForSeconds(animatorStateInfo.length);
+        if (IsShooting && IsDestroying)
+            return;
 
-        Destroy(gameObject);
+        IsShooting = true;
+        _animateEnemy.AttackAnimation();
+
+        StartCoroutine(ShootEnemyRoutine());
     }
 
+    private IEnumerator ShootEnemyRoutine()
+    {
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(Animator.GetCurrentAnimatorStateInfo(0).length);
+        IsShooting = false;
+        _animateEnemy.MovingAnimation();
+    }
+
+    private IEnumerator DestroyEnemyRoutine()
+    {
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(Animator.GetCurrentAnimatorStateInfo(0).length);
+        DestroyImmediate(gameObject);
+    }
 }

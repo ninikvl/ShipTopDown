@@ -22,9 +22,10 @@ public class DefautBullet : Bullet
     }
 
 
-    public override void Initialize(float bulletSpeed, int bulletDamage, BulletDataSO bulletDataSO, float bulletLifeTime = 2)
+    public override void Initialize(float bulletSpeed, int bulletDamage, BulletDataSO bulletDataSO)
     {
-        base.Initialize(bulletSpeed, bulletDamage, bulletDataSO, bulletLifeTime);
+        base.Initialize(bulletSpeed, bulletDamage, bulletDataSO);
+        _animator.CrossFade(Settings.AutoCannonBullet, 0, 0);
     }
 
 
@@ -34,7 +35,7 @@ public class DefautBullet : Bullet
     }
 
 
-    protected override void DisableBullet()
+    public override void DisableBullet()
     {
         base.DisableBullet();
     }

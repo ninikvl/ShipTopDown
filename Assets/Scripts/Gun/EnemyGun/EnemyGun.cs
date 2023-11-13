@@ -5,15 +5,24 @@ using static Gun;
 
 public abstract class EnemyGun : MonoBehaviour
 {
-    [SerializeField] private GunDataSO _gunDataSO;
-    [SerializeField] private BulletDataSO _bulletDataSO;
+    [SerializeField] public GunDataSO GunDataSO;
+    [SerializeField] public BulletDataSO BulletDataSO;
+    [SerializeField] private GameObject _shootPosition;
+
+    private IShootable _lastShootBullet;
 
 
     public virtual void InitializeShoot()
     {
-        IShootable bullet = (IShootable)PoolManager.Instance.ReuseComponent(_bulletDataSO.BulletPrefab, transform.position, Quaternion.identity);
-        bullet.Initialize(_bulletDataSO.BulletSpeed, _bulletDataSO.BulletDamageTier1, _bulletDataSO, this.gameObject);
+        IShootable bullet = (IShootable)PoolManager.Instance.ReuseComponent(BulletDataSO.BulletPrefab, transform.position, Quaternion.identity);
+        bullet.Initialize(BulletDataSO.BulletSpeed, BulletDataSO.BulletDamageTier1, BulletDataSO, _shootPosition.transform);
+        _lastShootBullet = bullet;
     }
 
+    public virtual void DisableLastShootBullet()
+    {
+        if(_lastShootBullet != null)
+            _lastShootBullet.DisableBullet();
+    }
 
 }

@@ -27,6 +27,6 @@ public class Health : MonoBehaviour
     private void DestroyCharacter()
     {
         GetComponent<PlayerShip>()?.PlayerDestroyed();
-        GetComponent<Enemy>()?.EnemyDestroyed();
+        GetComponent<Enemy>()?.StartEnemyDestroy();
     }
 }

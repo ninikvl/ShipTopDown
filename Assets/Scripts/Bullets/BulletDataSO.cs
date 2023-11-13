@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "GunDataSO_", menuName = "Scriptavle Objects/Bullet Info")]
+[CreateAssetMenu(fileName = "BulletDataSO_", menuName = "Scriptavle Objects/Bullet Info")]
 public class BulletDataSO : ScriptableObject
 {
     #region Header
@@ -17,4 +17,9 @@ public class BulletDataSO : ScriptableObject
     [SerializeField] public int BulletDamageTier1;
     [SerializeField] public int BulletDamageTier2;
     [SerializeField] public int BulletDamageTier3;
+
+    #region Header
+    [Header("Продолжительность жизни снаряда")]
+    #endregion
+    [SerializeField] public float BulletLifeTime;
 }

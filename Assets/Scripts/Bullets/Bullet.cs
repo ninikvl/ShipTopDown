@@ -10,8 +10,14 @@ public abstract class Bullet : MonoBehaviour, IShootable
     protected Vector2 _direction = new Vector2(0, 1);
     protected Vector2 _velocity;
     protected BulletDataSO _bulletDataSO;
-    protected GameObject _weaponObject;
+    protected Transform _shootPosition;
+    protected Animator _animator;
 
+
+    private void Awake()
+    {
+        _animator = GetComponent<Animator>();
+    }
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
@@ -26,26 +32,25 @@ public abstract class Bullet : MonoBehaviour, IShootable
         BulletMovement();
     }
 
-    public virtual void Initialize(float bulletSpeed, int bulletDamage, BulletDataSO bulletDataSO, float bulletLifeTime = 2)
+    public virtual void Initialize(float bulletSpeed, int bulletDamage, BulletDataSO bulletDataSO)
     {
         _speed = bulletSpeed;
         _damage = bulletDamage;
         _velocity = _direction * _speed;
 
         gameObject.SetActive(true);
-        StartCoroutine(BulletLifeRoutine(bulletLifeTime));
+        StartCoroutine(BulletLifeRoutine(bulletDataSO.BulletLifeTime));
     }
 
-    public virtual void Initialize(float bulletSpeed, int bulletDamage, BulletDataSO bulletDataSO, GameObject weaponObject, 
-        float bulletLifeTime = 2)
+    public virtual void Initialize(float bulletSpeed, int bulletDamage, BulletDataSO bulletDataSO, Transform shootPosition)
     {
         _speed = bulletSpeed;
         _damage = bulletDamage;
         _velocity = _direction * _speed;
-        _weaponObject = weaponObject;
+        _shootPosition = shootPosition;
 
         gameObject.SetActive(true);
-        StartCoroutine(BulletLifeRoutine(bulletLifeTime));
+        StartCoroutine(BulletLifeRoutine(bulletDataSO.BulletLifeTime));
     }
 
 
@@ -75,7 +80,7 @@ public abstract class Bullet : MonoBehaviour, IShootable
     }
 
 
-    protected virtual void DisableBullet()
+    public virtual void DisableBullet()
     {
         gameObject.SetActive(false);
     }

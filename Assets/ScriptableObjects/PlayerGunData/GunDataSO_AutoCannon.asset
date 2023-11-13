@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: Auto Cannon
   Description: 
   GunSprite: {fileID: 454166793, guid: 1135b58b806208f46b0e9fa99f6d7ab2, type: 3}
-  BulletSpawnIntervalTier1: 0.2
+  BulletSpawnIntervalTier1: 1
   BulletSpawnIntervalTier2: 0.1
   BulletSpawnIntervalTier3: 0
   BulletDataSO: {fileID: 11400000, guid: 0631d3eb8e099784a84acd9f69ce881a, type: 2}

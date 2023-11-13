@@ -4,14 +4,6 @@ using UnityEngine;
 
 public class Lazer : Bullet, IShootable
 {
-    private Animator _animator;
-
-
-    private void Awake()
-    {
-        _animator = GetComponent<Animator>();
-    }
-
     protected override void FixedUpdate()
     {
         BulletMovement();
@@ -19,30 +11,29 @@ public class Lazer : Bullet, IShootable
 
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
-        base.OnTriggerEnter2D(collision);
+        DealDamage(collision);
     }
-
 
     public new void BulletMovement()
     {
-        transform.position = _weaponObject.transform.position;
+        if (_shootPosition != null)
+            transform.position = _shootPosition.transform.position;
+        else
+            DisableBullet();
     }
 
-
-    public override void Initialize(float bulletSpeed, int bulletDamage, BulletDataSO bulletDataSO, GameObject weaponObject, float bulletLifeTime = 2)
+    public override void Initialize(float bulletSpeed, int bulletDamage, BulletDataSO bulletDataSO, Transform shootPosition)
     {
-        base.Initialize(bulletSpeed, bulletDamage, bulletDataSO, weaponObject, bulletLifeTime);
+        base.Initialize(bulletSpeed, bulletDamage, bulletDataSO, shootPosition);
         _animator.CrossFade(Settings.LazerAnimation, 0, 0);
     }
-
 
     protected override void DealDamage(Collider2D collision)
     {
         base.DealDamage(collision);
     }
 
-
-    protected override void DisableBullet()
+    public override void DisableBullet()
     {
         base.DisableBullet();
     }

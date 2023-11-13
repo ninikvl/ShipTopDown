@@ -22,8 +22,12 @@ public abstract class EnemyAI : MonoBehaviour
 
     }
 
+    public virtual void DeactivateAI() 
+    { 
 
-    public virtual void MoveToPosition(Vector2 movePosition, Vector2 currentPosition, float moveSpeed)
+    }
+
+    protected virtual void MoveToPosition(Vector2 movePosition, Vector2 currentPosition, float moveSpeed)
     {
         Vector3 unitVector = Vector3.Normalize(movePosition - currentPosition);
 

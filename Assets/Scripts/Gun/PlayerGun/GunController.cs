@@ -16,11 +16,13 @@ public class GunController : MonoBehaviour
     private Coroutine _ShootCoroutine = null;
 
     private SpriteRenderer _spriteRenderer;
+    private Animator _animator;
 
 
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _animator = GetComponent<Animator>();
 
         _gunsList = new List<Gun>()
         {
@@ -45,6 +47,8 @@ public class GunController : MonoBehaviour
 
         if (_playerInput.IsShoot && _ShootCoroutine == null)
         {
+            _animator.speed = _activeGun.GetBulletSpawnInterval() / 2;
+            _animator.CrossFade(Settings.AutoCannonShoot, 0, 0);
             _ShootCoroutine = StartCoroutine(ShootRoutine());
         }
     }

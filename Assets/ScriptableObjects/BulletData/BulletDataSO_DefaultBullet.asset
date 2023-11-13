@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1a95cce894783ab45b62591c0262f20a, type: 3}
-  m_Name: GunDataSO_DefaultBullet
+  m_Name: BulletDataSO_DefaultBullet
   m_EditorClassIdentifier: 
   BulletPrefab: {fileID: 5471594837369850996, guid: babeb3afe9155e04a9af741912546f67, type: 3}
-  BulletSpeed: 2
+  BulletSpeed: 4
   BulletDamageTier1: 1
   BulletDamageTier2: 5
   BulletDamageTier3: 7
+  BulletLifeTime: 5
