@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerInput : MonoBehaviour
 {
@@ -16,15 +17,26 @@ public class PlayerInput : MonoBehaviour
         _gameInput = new GameInput();
     }
 
-
     private void OnEnable()
     {
         _gameInput.Enable();
-    }
+        _gameInput.Gameplay.ChangeWeaponNext.performed += OnChangeWeapon;
+        _gameInput.Gameplay.ChangeWeaponPrevious.performed += OnChangeWeapon;
 
+    }
 
     private void OnDisable()
     {
         _gameInput.Disable();
+        _gameInput.Gameplay.ChangeWeaponNext.performed -= OnChangeWeapon;
+        _gameInput.Gameplay.ChangeWeaponPrevious.performed -= OnChangeWeapon;
+    }
+
+    private void OnChangeWeapon(InputAction.CallbackContext callbackContext)
+    {
+        if (callbackContext.control.name == "e")
+            PlayerShip.Instance.ChangePlayerActiveWeapon(true);
+        else
+            PlayerShip.Instance.ChangePlayerActiveWeapon(false);
     }
 }

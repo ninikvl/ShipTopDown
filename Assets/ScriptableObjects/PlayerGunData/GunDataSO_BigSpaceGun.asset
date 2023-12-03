@@ -15,7 +15,8 @@ MonoBehaviour:
   Name: BigSpaceGun
   Description: 
   GunSprite: {fileID: -1798157678, guid: d4d257326c3ac504e8ea6c8546891289, type: 3}
-  BulletPrefab: {fileID: 5471594837369850996, guid: babeb3afe9155e04a9af741912546f67, type: 3}
-  BulletSpeed: 0
-  BulletSpawnInterval: 0
-  BulletDamage: 0
+  BulletSpawnIntervalTier1: 5
+  BulletSpawnIntervalTier2: 0
+  BulletSpawnIntervalTier3: 0
+  WeaponAnimatorController: {fileID: 9100000, guid: 5c1be34a9f7cf6549996a2121262a390, type: 2}
+  BulletDataSO: {fileID: 11400000, guid: d8a9eedc773f97f46ad67d7d8529b3ac, type: 2}

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a95cce894783ab45b62591c0262f20a, type: 3}
+  m_Name: BulletDataSO_BigSpaceGunBullet
+  m_EditorClassIdentifier: 
+  BulletPrefab: {fileID: 5471594837369850996, guid: a47d78d91280b56478f3d7a687153c0b, type: 3}
+  BulletDamageTier1: 1
+  BulletDamageTier2: 1
+  BulletDamageTier3: 1
+  BulletSpeedTier1: 4
+  BulletSpeedTier2: 4
+  BulletSpeedTier3: 8
+  BulletLifeTime: 5

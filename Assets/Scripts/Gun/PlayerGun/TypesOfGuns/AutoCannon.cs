@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using static Gun;
 
 public class AutoCannon : Gun
 {

@@ -6,6 +6,7 @@ using UnityEngine;
 public class GunController : MonoBehaviour
 {
     [SerializeField] private GunDataSO _autoCannonGunData;
+    [SerializeField] private GunDataSO _bigSpaceGunData;
 
     private List<Gun> _gunsList;
 
@@ -25,19 +26,43 @@ public class GunController : MonoBehaviour
 
         _gunsList = new List<Gun>()
         {
+            new BigSpaceGun (Gun.TierLevel.First, _bigSpaceGunData),
+            new AutoCannon (Gun.TierLevel.First, _autoCannonGunData),
+            new AutoCannon (Gun.TierLevel.First, _autoCannonGunData),
             new AutoCannon (Gun.TierLevel.First, _autoCannonGunData)
         };
-
-        _activeGun = _gunsList[0];
-        _spriteRenderer.sprite = _activeGun.GunDataSO.GunSprite;
     }
-
 
     private void Start()
     {
         _playerInput = PlayerShip.Instance.PlayerInput;
+
+        _activeGun = _gunsList[0];
     }
 
+    public void ChangeActiveWeapon(bool isNextWeapon)
+    {
+        int activeWeaponIndex;
+
+        if (isNextWeapon)
+        {
+            activeWeaponIndex = _gunsList.IndexOf(_activeGun);
+            if (activeWeaponIndex < _gunsList.Count - 1)
+                _activeGun = _gunsList[++activeWeaponIndex];
+            else
+                _activeGun = _gunsList[0];
+        }
+        else
+        {
+            activeWeaponIndex = _gunsList.IndexOf(_activeGun);
+            if (activeWeaponIndex > 0)
+                _activeGun = _gunsList[--activeWeaponIndex];
+            else
+                _activeGun = _gunsList[_gunsList.Count - 1];
+        }
+
+        _animator.runtimeAnimatorController = _activeGun.GunDataSO.WeaponAnimatorController;
+    }
 
     private void FixedUpdate()
     {
@@ -46,8 +71,8 @@ public class GunController : MonoBehaviour
 
         if (_playerInput.IsShoot && _shootCoroutine == null)
         {
-            _animator.speed = _activeGun.GetBulletSpawnInterval() / _activeGun.GetBulletSpawnInterval();
-            _animator.CrossFade(Settings.AutoCannonShoot, 0, 0);
+            //_animator.speed = _activeGun.GetBulletSpawnInterval() / _activeGun.GetBulletSpawnInterval();
+            _animator.CrossFade(Settings.PlayerGunShoot, 0, 0);
             _shootCoroutine = StartCoroutine(ShootRoutine());
         }
     }
@@ -56,6 +81,10 @@ public class GunController : MonoBehaviour
     private IEnumerator ShootRoutine()
     {
         _activeGun.InitializeShoot(transform);
+
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(_animator.GetCurrentAnimatorStateInfo(0).length);
+        _animator.CrossFade(Settings.PlayerGunIdle, 0, 0);
 
         yield return new WaitForSeconds(_activeGun.GetBulletSpawnInterval());
         _shootCoroutine = null;

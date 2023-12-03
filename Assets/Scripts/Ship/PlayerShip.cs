@@ -12,6 +12,8 @@ public class PlayerShip : SingletonMonoBehaviour<PlayerShip>
     private Coroutine _invulnerabilityRoutine;
 
     private Health _health;
+    private GunController _gunController;
+
     [SerializeField] private PlayerDataSO _playerData;
 
     private SpriteRenderer _spriteRenderer;
@@ -25,6 +27,7 @@ public class PlayerShip : SingletonMonoBehaviour<PlayerShip>
         PlayerInput = GetComponent<PlayerInput>();
         _health = GetComponent<Health>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _gunController = GetComponentInChildren<GunController>();
 
         _health.SetStartHealth(_playerData.StartHealth);
     }
@@ -116,5 +119,10 @@ public class PlayerShip : SingletonMonoBehaviour<PlayerShip>
     public void StartPlayerDestroy()
     {
         gameObject.SetActive(false);
+    }
+
+    public void ChangePlayerActiveWeapon(bool isNext)
+    {
+        _gunController.ChangeActiveWeapon(isNext);
     }
 }

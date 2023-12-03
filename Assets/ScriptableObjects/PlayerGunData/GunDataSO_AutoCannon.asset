@@ -18,4 +18,5 @@ MonoBehaviour:
   BulletSpawnIntervalTier1: 1
   BulletSpawnIntervalTier2: 0.7
   BulletSpawnIntervalTier3: 0.5
+  WeaponAnimatorController: {fileID: 9100000, guid: fe03ec435e1f30b49bcb23364b095359, type: 2}
   BulletDataSO: {fileID: 11400000, guid: 0631d3eb8e099784a84acd9f69ce881a, type: 2}

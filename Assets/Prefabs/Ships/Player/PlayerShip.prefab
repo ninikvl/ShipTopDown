@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _autoCannonGunData: {fileID: 11400000, guid: f66434a33fda6fd42856ccd1173b0279, type: 2}
+  _bigSpaceGunData: {fileID: 11400000, guid: 966cf74881b3ef34d97857397a88d637, type: 2}
 --- !u!95 &5563517445546183226
 Animator:
   serializedVersion: 5
@@ -109,7 +110,7 @@ Animator:
   m_GameObject: {fileID: 409446815655382744}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: fe03ec435e1f30b49bcb23364b095359, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5c1be34a9f7cf6549996a2121262a390, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

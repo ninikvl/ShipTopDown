@@ -16,7 +16,8 @@ public static class Settings
     #endregion
 
     #region WeaponAnimation
-    public static int AutoCannonShoot = Animator.StringToHash("AutoCannonShoot");
+    public static int PlayerGunShoot = Animator.StringToHash("PlayerGunShoot");
+    public static int PlayerGunIdle = Animator.StringToHash("PlayerGunIdle");
     #endregion
 
     #region MapCoorinates

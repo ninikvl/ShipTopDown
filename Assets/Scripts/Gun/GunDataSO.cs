@@ -1,3 +1,4 @@
+using UnityEditor.Animations;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "GunDataSO_", menuName = "Scriptable Objects/Gun Info")]
@@ -20,5 +21,6 @@ public class GunDataSO : ScriptableObject
     [SerializeField] public float BulletSpawnIntervalTier2;
     [SerializeField] public float BulletSpawnIntervalTier3;
 
+    [SerializeField] public AnimatorController WeaponAnimatorController;
     [SerializeField] public BulletDataSO BulletDataSO;
 }
