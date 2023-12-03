@@ -12,6 +12,11 @@ GameObject:
   - component: {fileID: 3133148635042621385}
   - component: {fileID: 2126619444329399525}
   - component: {fileID: 6163119794160161263}
+  - component: {fileID: 141041502015629880}
+  - component: {fileID: 2299334483105341272}
+  - component: {fileID: -302968592809976267}
+  - component: {fileID: -6987801608924936628}
+  - component: {fileID: -6751751041529624588}
   m_Layer: 7
   m_Name: Fighter
   m_TagString: Untagged
@@ -170,6 +175,101 @@ PolygonCollider2D:
       - {x: 0.3745911, y: -0.18805122}
       - {x: 0.37692118, y: 0.27659035}
   m_UseDelaunayMesh: 0
+--- !u!114 &141041502015629880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 472249793176344452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd995a79507f15b4f9fe423c8927e62d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2299334483105341272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 472249793176344452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cedae8e3fc026c46a059564a6db6245, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-302968592809976267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 472249793176344452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 936c108e95dde384ba990a50261dedb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyDataSO: {fileID: 11400000, guid: 95d89bea9ecbb5945a7e125998744fc8, type: 2}
+--- !u!114 &-6987801608924936628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 472249793176344452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 181ffbb885b208340bc5d4b8a5236ea0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GunDataSO: {fileID: 11400000, guid: f66434a33fda6fd42856ccd1173b0279, type: 2}
+  BulletDataSO: {fileID: 11400000, guid: b5e2fa4bdc570d94e9f0449301c8c58d, type: 2}
+  _shootPosition: {fileID: 4878282443736236654}
+--- !u!114 &-6751751041529624588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 472249793176344452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7caff45aa41807b469f2ebc4f24c6594, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &4878282443736236654
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7440923810930901251}
+  m_Layer: 0
+  m_Name: ShootPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7440923810930901251
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4878282443736236654}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.375, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1659766886941021528}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5659371801867912631
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,7 +383,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 7440923810930901251}
   m_Father: {fileID: 6797045427213116001}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3000676440816054049

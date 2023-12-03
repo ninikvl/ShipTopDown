@@ -7,11 +7,14 @@ public abstract class Bullet : MonoBehaviour, IShootable
 {
     protected float _speed;
     protected int _damage;
+
     protected Vector2 _direction = new Vector2(0, 1);
     protected Vector2 _velocity;
-    protected BulletDataSO _bulletDataSO;
+
     protected Transform _shootPosition;
     protected Animator _animator;
+
+    protected BulletDataSO _bulletDataSO;
 
 
     private void Awake()
@@ -25,7 +28,6 @@ public abstract class Bullet : MonoBehaviour, IShootable
 
         DisableBullet();
     }
-
 
     protected virtual void FixedUpdate()
     {
@@ -53,6 +55,16 @@ public abstract class Bullet : MonoBehaviour, IShootable
         StartCoroutine(BulletLifeRoutine(bulletDataSO.BulletLifeTime));
     }
 
+    public virtual void Initialize(float bulletSpeed, int bulletDamage, BulletDataSO bulletDataSO, Vector2 direction)
+    {
+        _speed = bulletSpeed;
+        _damage = bulletDamage;
+        _velocity = direction * _speed;
+        transform.rotation = Quaternion.FromToRotation(_direction, direction);
+
+        gameObject.SetActive(true);
+        StartCoroutine(BulletLifeRoutine(bulletDataSO.BulletLifeTime));
+    }
 
     public virtual void BulletMovement()
     {
@@ -61,13 +73,11 @@ public abstract class Bullet : MonoBehaviour, IShootable
         transform.position = pos;
     }
 
-
     private IEnumerator BulletLifeRoutine(float lifeTime)
     {
         yield return new WaitForSeconds(lifeTime);
         DisableBullet();
     }
-
 
     protected virtual void DealDamage(Collider2D collision)
     {
@@ -78,7 +88,6 @@ public abstract class Bullet : MonoBehaviour, IShootable
             health.TakeDamage(_damage);
         }
     }
-
 
     public virtual void DisableBullet()
     {

@@ -9,7 +9,6 @@ public class BulletDataSO : ScriptableObject
     [Header("Параметры снаряда")]
     #endregion
     [SerializeField] public GameObject BulletPrefab;
-    [SerializeField] public int BulletSpeed;
 
     #region Header
     [Header("Урон снаряда")]
@@ -17,6 +16,13 @@ public class BulletDataSO : ScriptableObject
     [SerializeField] public int BulletDamageTier1;
     [SerializeField] public int BulletDamageTier2;
     [SerializeField] public int BulletDamageTier3;
+
+    #region Header
+    [Header("Скорость снаряда")]
+    #endregion
+    [SerializeField] public int BulletSpeedTier1;
+    [SerializeField] public int BulletSpeedTier2;
+    [SerializeField] public int BulletSpeedTier3;
 
     #region Header
     [Header("Продолжительность жизни снаряда")]

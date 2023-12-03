@@ -1,22 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static Gun;
 
 public abstract class EnemyGun : MonoBehaviour
 {
-    [SerializeField] public GunDataSO GunDataSO;
     [SerializeField] public BulletDataSO BulletDataSO;
-    [SerializeField] private GameObject _shootPosition;
+    [SerializeField] protected GameObject _shootPosition;
 
-    private IShootable _lastShootBullet;
+    protected Enemy _enemy;
 
+    protected IShootable _lastShootBullet;
+
+    protected virtual void Awake()
+    {
+        _enemy = GetComponent<Enemy>();
+    }
 
     public virtual void InitializeShoot()
     {
-        IShootable bullet = (IShootable)PoolManager.Instance.ReuseComponent(BulletDataSO.BulletPrefab, transform.position, Quaternion.identity);
-        bullet.Initialize(BulletDataSO.BulletSpeed, BulletDataSO.BulletDamageTier1, BulletDataSO, _shootPosition.transform);
-        _lastShootBullet = bullet;
+        if (gameObject != null)
+        {
+            IShootable bullet = (IShootable)PoolManager.Instance.ReuseComponent(BulletDataSO.BulletPrefab, transform.position, Quaternion.identity);
+            bullet.Initialize(BulletDataSO.BulletSpeedTier1, BulletDataSO.BulletDamageTier1, BulletDataSO, _shootPosition.transform);
+
+            _lastShootBullet = bullet;
+        }
     }
 
     public virtual void DisableLastShootBullet()
@@ -24,5 +32,4 @@ public abstract class EnemyGun : MonoBehaviour
         if(_lastShootBullet != null)
             _lastShootBullet.DisableBullet();
     }
-
 }

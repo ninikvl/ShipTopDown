@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "GunDataSO_", menuName = "Scriptavle Objects/Gun Info")]
+[CreateAssetMenu(fileName = "GunDataSO_", menuName = "Scriptable Objects/Gun Info")]
 public class GunDataSO : ScriptableObject
 {
     #region Header Орудие

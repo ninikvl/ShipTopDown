@@ -4,42 +4,96 @@ using static Gun;
 
 public class AutoCannon : Gun
 {
-    private bool _isFirstShoot = true;
+    private enum ShootTier
+    {
+        One,
+        Two,
+        Three
+    }
+
+    private const float yBulletOffset = 0.38f;
+    private const float xBulletOffset = 0.28f;
 
     public AutoCannon(TierLevel tierLevel, GunDataSO gunDataSO) : base(tierLevel, gunDataSO)
     {
     }
 
-    public override void InitializeShoot(Vector3 gunPosition)
+    public override void InitializeShoot(Transform gunPosition)
     {
         base.InitializeShoot(gunPosition);
     }
 
-    protected override void ShootTierOne(Vector3 gunPosition)
+    protected override void ShootTierOne(Transform gunPosition)
     {
-        Vector3 rightGunPosition = new Vector3(gunPosition.x + 0.27f, gunPosition.y + 0.38f);
-
-        IShootable bullet = (IShootable)PoolManager.Instance.ReuseComponent(BulletDataSO.BulletPrefab, rightGunPosition, Quaternion.identity);
-        bullet.Initialize(BulletDataSO.BulletSpeed, _bulletDamage, BulletDataSO);
-
-        rightGunPosition = new Vector3(gunPosition.x - 0.28f, gunPosition.y + 0.38f);
-
-        bullet = (IShootable)PoolManager.Instance.ReuseComponent(BulletDataSO.BulletPrefab, rightGunPosition, Quaternion.identity);
-        bullet.Initialize(BulletDataSO.BulletSpeed, _bulletDamage, BulletDataSO);
-    }
-        
-    protected override void ShootTierTwo(Vector3 gunPosition)
-    {
-        IShootable bullet = (IShootable)PoolManager.Instance.ReuseComponent(BulletDataSO.BulletPrefab, gunPosition, Quaternion.identity);
-        bullet.Initialize(BulletDataSO.BulletSpeed, _bulletDamage, BulletDataSO);
+        Coroutines.StartRoutine(ShootRoutine(gunPosition, ShootTier.One));
     }
 
-    protected override void ShootTierThree(Vector3 gunPosition)
+    protected override void ShootTierTwo(Transform gunPosition)
     {
-
+        Coroutines.StartRoutine(ShootRoutine(gunPosition, ShootTier.Two));
     }
-    public override void UpTierLevel()
+
+    protected override void ShootTierThree(Transform gunPosition)
     {
-        base.UpTierLevel();
+        Coroutines.StartRoutine(ShootRoutine(gunPosition, ShootTier.Three));
+    }
+
+    private IEnumerator ShootRoutine(Transform gunPosition, ShootTier shootTier)
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        Vector3 newGunPosition;
+        Vector2 newDirection;
+
+        switch (shootTier)
+        {
+            case ShootTier.One:
+
+                newGunPosition = new Vector3(gunPosition.position.x + xBulletOffset, gunPosition.position.y + yBulletOffset);
+                CreateBullet(newGunPosition);
+
+                newGunPosition = new Vector3(gunPosition.position.x - xBulletOffset, gunPosition.position.y + yBulletOffset);
+                CreateBullet(newGunPosition);
+
+                break;
+            case ShootTier.Two:
+
+                newGunPosition = new Vector3(gunPosition.position.x + xBulletOffset, gunPosition.position.y + yBulletOffset);
+                CreateBullet(newGunPosition);
+
+                newGunPosition = new Vector3(gunPosition.position.x - xBulletOffset, gunPosition.position.y + yBulletOffset);
+                CreateBullet(newGunPosition);
+
+                break;
+            case ShootTier.Three:
+
+                newGunPosition = new Vector3(gunPosition.position.x + xBulletOffset, gunPosition.position.y + yBulletOffset);
+                CreateBullet(newGunPosition);
+
+                newGunPosition = new Vector3(gunPosition.position.x - xBulletOffset, gunPosition.position.y + yBulletOffset);
+                CreateBullet(newGunPosition);
+
+                newGunPosition = new Vector3(gunPosition.position.x - xBulletOffset, gunPosition.position.y + yBulletOffset);
+                newDirection = new Vector2(-0.5f, 1f);
+                CreateBullet(newGunPosition, newDirection);
+
+                newGunPosition = new Vector3(gunPosition.position.x + xBulletOffset, gunPosition.position.y + yBulletOffset);
+                newDirection = new Vector2(0.5f, 1f);
+                CreateBullet(newGunPosition, newDirection);
+
+                break;
+            default:
+                break;
+        }
+    }
+
+    protected override void CreateBullet(Vector3 newGunPosition)
+    {
+        base.CreateBullet(newGunPosition);
+    }
+
+    protected override void CreateBullet(Vector3 newGunPosition, Vector2 newDirection)
+    {
+        base.CreateBullet(newGunPosition, newDirection);
     }
 }

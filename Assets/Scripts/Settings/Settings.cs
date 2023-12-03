@@ -12,7 +12,7 @@ public static class Settings
 
     #region BulletAnimations
     public static int LazerAnimation = Animator.StringToHash("Lazer");
-    public static int AutoCannonBullet = Animator.StringToHash("AutoCannonBullet");
+    public static int CommonBulletAnimation = Animator.StringToHash("CommonBulletAnimation");
     #endregion
 
     #region WeaponAnimation

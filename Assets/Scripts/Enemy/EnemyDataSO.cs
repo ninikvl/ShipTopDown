@@ -7,4 +7,10 @@ public class EnemyDataSO : ScriptableObject
 {
     [SerializeField] public int HealthPoint;
     [SerializeField] public int MovementSpeed;
+
+
+    [SerializeField] public float xShipOffest;
+    [SerializeField] public float yShipOffest;
+
+
 }

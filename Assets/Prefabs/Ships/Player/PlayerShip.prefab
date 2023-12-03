@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 454166793, guid: 1135b58b806208f46b0e9fa99f6d7ab2, type: 3}
+  m_Sprite: {fileID: -1519160319, guid: fa0fc2a5d81c88b4280b0a8da0dfb764, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ff34f0f17cc5c7459fbd15edcd39f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaultGunData: {fileID: 11400000, guid: f66434a33fda6fd42856ccd1173b0279, type: 2}
+  _autoCannonGunData: {fileID: 11400000, guid: f66434a33fda6fd42856ccd1173b0279, type: 2}
 --- !u!95 &5563517445546183226
 Animator:
   serializedVersion: 5
@@ -324,6 +324,8 @@ GameObject:
   - component: {fileID: 795775399923430798}
   - component: {fileID: 7531172791976324141}
   - component: {fileID: 8659357723694207641}
+  - component: {fileID: 6134411841479788349}
+  - component: {fileID: 6709690596570796148}
   m_Layer: 6
   m_Name: PlayerShip
   m_TagString: Untagged
@@ -412,6 +414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8d443a899ba0f649b573f1f533c5498, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerData: {fileID: 11400000, guid: 4952dcf8b2b06a54bb189096c5cc2134, type: 2}
 --- !u!114 &7531172791976324141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -484,3 +487,42 @@ PolygonCollider2D:
       - {x: 0.030734539, y: 0.4062004}
       - {x: -0.03031969, y: 0.40605974}
   m_UseDelaunayMesh: 0
+--- !u!114 &6134411841479788349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6153211132778246459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd995a79507f15b4f9fe423c8927e62d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!50 &6709690596570796148
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6153211132778246459}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0

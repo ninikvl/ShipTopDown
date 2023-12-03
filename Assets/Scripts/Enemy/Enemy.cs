@@ -6,13 +6,14 @@ using UnityEngine;
 [RequireComponent(typeof(AnimateEnemy))]
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private EnemyDataSO _enemyDataSO;
+    [SerializeField] public EnemyDataSO EnemyDataSO;
 
     private Health _health;
-    private AnimateEnemy _animateEnemy;
-    private PolygonCollider2D _polygonCollider;
     private EnemyAI _enemyAI;
+    private AnimateEnemy _animateEnemy;
     
+    private PolygonCollider2D _polygonCollider;
+
     public Animator Animator { get; private set; }
 
     public bool IsShooting {  get; private set; }
@@ -30,7 +31,7 @@ public class Enemy : MonoBehaviour
         IsDestroying = false;
         IsShooting = false;
 
-        _health.SetStartHealth(_enemyDataSO.HealthPoint);
+        _health.SetStartHealth(EnemyDataSO.HealthPoint);
     }
 
     public void StartEnemyDestroy()
@@ -39,9 +40,9 @@ public class Enemy : MonoBehaviour
             return;
 
         IsDestroying = true;
-        _enemyAI.DeactivateAI();
-        StopAllCoroutines();
 
+        StopAllCoroutines();
+        _enemyAI.DeactivateAI();
         _polygonCollider.enabled = false;
 
         _animateEnemy.DestroyAnimation();
@@ -51,7 +52,7 @@ public class Enemy : MonoBehaviour
 
     public void StartEnemyAttack()
     {
-        if (IsShooting && IsDestroying)
+        if (IsShooting || IsDestroying)
             return;
 
         IsShooting = true;

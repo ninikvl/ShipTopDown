@@ -5,15 +5,14 @@ using UnityEngine;
 
 public class GunController : MonoBehaviour
 {
-    [SerializeField] private GunDataSO _defaultGunData;
+    [SerializeField] private GunDataSO _autoCannonGunData;
 
     private List<Gun> _gunsList;
 
+    private Coroutine _shootCoroutine = null;
+
     private Gun _activeGun;
-
     private PlayerInput _playerInput;
-
-    private Coroutine _ShootCoroutine = null;
 
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;
@@ -26,7 +25,7 @@ public class GunController : MonoBehaviour
 
         _gunsList = new List<Gun>()
         {
-            new AutoCannon (Gun.TierLevel.First, _defaultGunData)
+            new AutoCannon (Gun.TierLevel.First, _autoCannonGunData)
         };
 
         _activeGun = _gunsList[0];
@@ -45,21 +44,21 @@ public class GunController : MonoBehaviour
         if (_activeGun == null)
             Debug.LogException(new Exception("Активное оружие не установленно"));
 
-        if (_playerInput.IsShoot && _ShootCoroutine == null)
+        if (_playerInput.IsShoot && _shootCoroutine == null)
         {
-            _animator.speed = _activeGun.GetBulletSpawnInterval() / 2;
+            _animator.speed = _activeGun.GetBulletSpawnInterval() / _activeGun.GetBulletSpawnInterval();
             _animator.CrossFade(Settings.AutoCannonShoot, 0, 0);
-            _ShootCoroutine = StartCoroutine(ShootRoutine());
+            _shootCoroutine = StartCoroutine(ShootRoutine());
         }
     }
 
 
     private IEnumerator ShootRoutine()
     {
-        _activeGun.InitializeShoot(transform.position);
+        _activeGun.InitializeShoot(transform);
 
         yield return new WaitForSeconds(_activeGun.GetBulletSpawnInterval());
-        _ShootCoroutine = null;
+        _shootCoroutine = null;
     }
 
     public void GunTierUp()

@@ -209,7 +209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 936c108e95dde384ba990a50261dedb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyDataSO: {fileID: 11400000, guid: 95d89bea9ecbb5945a7e125998744fc8, type: 2}
+  EnemyDataSO: {fileID: 11400000, guid: 95d89bea9ecbb5945a7e125998744fc8, type: 2}
 --- !u!114 &-5467957197218095914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,6 +246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7caff45aa41807b469f2ebc4f24c6594, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _yAnchorPosition: 15
 --- !u!114 &4372942078185973356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,7 +259,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 181ffbb885b208340bc5d4b8a5236ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GunDataSO: {fileID: 11400000, guid: f66434a33fda6fd42856ccd1173b0279, type: 2}
   BulletDataSO: {fileID: 11400000, guid: b5e2fa4bdc570d94e9f0449301c8c58d, type: 2}
   _shootPosition: {fileID: 345871274284668079}
 --- !u!1 &4932904274035283430
